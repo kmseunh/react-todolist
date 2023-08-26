@@ -34,6 +34,7 @@ const Input = ({ onAddTodo }) => {
         <div style={{ display: 'flex', alignItems: 'center' }}>
             <StyledInput
                 value={inputValue}
+                placeholder='Enter your Todo...'
                 onChange={(e) => setInputValue(e.target.value)}
             />
             <Button onClick={handleClick}>Add</Button>
