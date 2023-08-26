@@ -22,13 +22,18 @@ const Home = () => {
         setTodos([...todos, newTodo]);
     };
 
+    const deleteTodo = (todoId) => {
+        const updatedTodos = todos.filter((todo) => todo.id !== todoId);
+        setTodos(updatedTodos);
+    };
+
     return (
         <div>
             <HomeContainer>
                 <h1>Todo List</h1>
                 <Input onAddTodo={addTodo} />
                 <div>
-                    <TodoList todos={todos} />
+                    <TodoList todos={todos} onDeleteTodo={deleteTodo} />
                 </div>
             </HomeContainer>
         </div>
