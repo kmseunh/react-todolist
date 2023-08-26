@@ -12,12 +12,20 @@ const StyledTodo = styled.div`
     align-items: center;
 `;
 
-const Todo = ({ todo }) => {
+const Todo = ({ todo, onDelete }) => {
+    const handleDelete = () => {
+        onDelete(todo.id);
+    };
+
     return (
         <div>
             <StyledTodo>
                 {todo.text}
-                <Button backgroundColor='#FF5733' hoverColor='#FF814E'>
+                <Button
+                    backgroundColor='#FF5733'
+                    hoverColor='#FF814E'
+                    onClick={handleDelete}
+                >
                     Delete
                 </Button>
             </StyledTodo>
