@@ -1,24 +1,49 @@
-import { Route, Routes } from 'react-router-dom';
-import { styled } from 'styled-components';
-import Home from './pages/Home';
+import { useReducer } from 'react';
+import AddTask from './components/AddTasks.jsx';
+import TaskList from './components/TaskList.jsx';
+import tasksReducer from './reducers/taskReducer.js';
 
-const AppContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-`;
+export default function TaskApp() {
+    const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
 
-const App = () => {
+    function handleAddTask(text) {
+        dispatch({
+            type: 'added',
+            id: nextId++,
+            text: text,
+        });
+    }
+
+    function handleChangeTask(task) {
+        dispatch({
+            type: 'changed',
+            task: task,
+        });
+    }
+
+    function handleDeleteTask(taskId) {
+        dispatch({
+            type: 'deleted',
+            id: taskId,
+        });
+    }
+
     return (
         <>
-            <AppContainer>
-                <Routes>
-                    <Route path='/' element={<Home />} />
-                </Routes>
-            </AppContainer>
+            <h1>Prague itinerary</h1>
+            <AddTask onAddTask={handleAddTask} />
+            <TaskList
+                tasks={tasks}
+                onChangeTask={handleChangeTask}
+                onDeleteTask={handleDeleteTask}
+            />
         </>
     );
-};
+}
 
-export default App;
+let nextId = 3;
+const initialTasks = [
+    { id: 0, text: 'Visit Kafka Museum', done: true },
+    { id: 1, text: 'Watch a puppet show', done: false },
+    { id: 2, text: 'Lennon Wall pic', done: false },
+];
