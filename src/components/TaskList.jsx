@@ -4,13 +4,13 @@ import { TasksContext, TasksDispatchContext } from '../contexts/TasksContext';
 export default function TaskList() {
     const tasks = useContext(TasksContext);
     return (
-        <ul>
+        <div className='mt-4'>
             {tasks.map((task) => (
-                <li key={task.id}>
+                <div className='mb-2' key={task.id}>
                     <Task task={task} />
-                </li>
+                </div>
             ))}
-        </ul>
+        </div>
     );
 }
 
@@ -22,6 +22,7 @@ function Task({ task }) {
         taskContent = (
             <>
                 <input
+                    className='mr-2'
                     value={task.text}
                     onChange={(e) => {
                         dispatch({
@@ -33,20 +34,31 @@ function Task({ task }) {
                         });
                     }}
                 />
-                <button onClick={() => setIsEditing(false)}>Save</button>
+                <button
+                    className='bg-green-500 text-white p-1 rounded'
+                    onClick={() => setIsEditing(false)}
+                >
+                    Save
+                </button>
             </>
         );
     } else {
         taskContent = (
             <>
                 {task.text}
-                <button onClick={() => setIsEditing(true)}>Edit</button>
+                <button
+                    className='ml-2 p-1 bg-blue-500 text-white rounded'
+                    onClick={() => setIsEditing(true)}
+                >
+                    Edit
+                </button>
             </>
         );
     }
     return (
-        <label>
+        <label className='flex items-center'>
             <input
+                className='form-checkbox h-5 w-5 text-blue-500 mr-2'
                 type='checkbox'
                 checked={task.done}
                 onChange={(e) => {
@@ -61,6 +73,7 @@ function Task({ task }) {
             />
             {taskContent}
             <button
+                className='ml-2 p-1 bg-red-500 text-white rounded'
                 onClick={() => {
                     dispatch({
                         type: 'deleted',
