@@ -1,13 +1,22 @@
-import AddTask from './components/AddTasks.jsx';
-import TaskList from './components/TaskList.jsx';
-import { TasksProvider } from './contexts/TasksContext.jsx';
+import React from 'react';
+import AddTask from './components/AddTasks';
+import TaskList from './components/TaskList';
+import { TasksProvider } from './contexts/TasksContext';
 
-export default function TaskApp() {
+const TaskApp = () => {
     return (
         <TasksProvider>
-            <h1>Day off in Kyoto</h1>
-            <AddTask />
-            <TaskList />
+            <div className='flex items-center justify-center h-screen bg-gray-100'>
+                <div className='max-w-md w-full bg-white p-8 rounded shadow-md'>
+                    <h1 className='text-2xl font-bold mb-4'>
+                        Day off in Kyoto
+                    </h1>
+                    <AddTask />
+                    <TaskList />
+                </div>
+            </div>
         </TasksProvider>
     );
-}
+};
+
+export default TaskApp;
